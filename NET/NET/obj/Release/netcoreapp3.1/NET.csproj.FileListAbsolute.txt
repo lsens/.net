@@ -210,3 +210,6 @@ C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\staticwebassets\N
 C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.dll
 C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.pdb
 C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.genruntimeconfig.cache
+C:\Users\HC\Desktop\git\.net\NET\NET\bin\Release\netcoreapp3.1\MathNet.Numerics.dll
+C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.csproj.CoreCompileInputs.cache
+C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.MvcApplicationPartsAssemblyInfo.cache

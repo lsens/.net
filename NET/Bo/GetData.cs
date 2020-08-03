@@ -278,6 +278,7 @@ namespace Bo
                     CutCalculateList monthClist = cd.CutCalculateData(monthlist, 4, 24);
                     List<double> LineDatas = dc.GetJsonDataCount(monthData);
 
+
                     if (dataStatus == 3)
                     {
                         monthlist = dc.GetNewDayCount(monthData, 1);
@@ -287,8 +288,15 @@ namespace Bo
                     List<double?> monthCAClist = monthClist.AmplitudeCList;
 
                     List<double> ttList = monthClist.TrendCList.Select(x => x.Value).ToList();
-                    double[] ttC = cd.PercentileData(ttList);
-                    int[] normalData = { (int)Math.Round(ttC[1]), (int)Math.Round(ttC[2]) };
+
+                    // 老办法
+                    //double[] ttC = cd.PercentileData(ttList);
+                    //int[] normalData = { (int)Math.Round(ttC[1]), (int)Math.Round(ttC[2]) };
+
+                    // 新模型
+                    double[] arr = cd.DataPercentileInplace(LineDatas);
+                    int[] normalData = { (int)Math.Round(arr[1]), (int)Math.Round(arr[2]) };
+                    int[] abnormalData = { (int)Math.Round(arr[0]), (int)Math.Round(arr[3]) };
                     // MinuteR a = mt.BasicModule(monthlist, monthTime, 4, 24);
 
                     r = new MonthWarnR
@@ -296,50 +304,49 @@ namespace Bo
                         LineData = ttList.ToArray(),
                         LineTime = monthTime.ToArray(),
                         PointData = LineDatas.ToArray(),
-                        //PointData = PointData.ToArray(),
                         //PointTime = PointTime.ToArray(),
-                        NormalData = normalData
+                        NormalData = normalData,
+                        AbnormalData = abnormalData
                     };
                 }
             }
-
-            if (p.month == 13)
-            {
-                List<double> LineDatas = new List<double>();
-                List<int> LineTimes = new List<int>();
-                List<double> PointDatas = new List<double>();
-                for (int i = 0; i < monthCount.Count; i++)
-                {
-                    List<string> monthData = monthCount[i].MonthData;
- 
-                    List<double> PointData = dc.GetJsonDataCount(monthData);
-                    List<double> monthlist = dc.GetNewDayCount(monthData);
-                    CutCalculateList monthClist = cd.CutCalculateData(monthlist, 4, 24);
-
-                    if (dataStatus == 3)
-                    {
-                        monthlist = dc.GetNewDayCount(monthData, 1);
-                        monthClist = cd.CutCalculateData(monthlist, 4, 24);
-                    }
-
-                    LineDatas.AddRange(monthClist.TrendCList.Select(x => x.Value));
-                    LineTimes.AddRange(monthCount[i].MonthTime);
-                    PointDatas.AddRange(PointData);
-
-                }
-
-                r = new MonthWarnR
-                {
-                    LineData = LineDatas.ToArray(),
-                    LineTime = LineTimes.ToArray(),
-                    PointData = PointDatas.ToArray(),
-                    //PointData = PointData.ToArray(),
-                    //PointTime = PointTime.ToArray(),
-                    //NormalData = normalData
-                };
-            }
-
             return r;
+
+            //if (p.month == 13)
+            //{
+            //    List<double> LineDatas = new List<double>();
+            //    List<int> LineTimes = new List<int>();
+            //    List<double> PointDatas = new List<double>();
+            //    for (int i = 0; i < monthCount.Count; i++)
+            //    {
+            //        List<string> monthData = monthCount[i].MonthData;
+
+            //        List<double> PointData = dc.GetJsonDataCount(monthData);
+            //        List<double> monthlist = dc.GetNewDayCount(monthData);
+            //        CutCalculateList monthClist = cd.CutCalculateData(monthlist, 4, 24);
+
+            //        if (dataStatus == 3)
+            //        {
+            //            monthlist = dc.GetNewDayCount(monthData, 1);
+            //            monthClist = cd.CutCalculateData(monthlist, 4, 24);
+            //        }
+
+            //        LineDatas.AddRange(monthClist.TrendCList.Select(x => x.Value));
+            //        LineTimes.AddRange(monthCount[i].MonthTime);
+            //        PointDatas.AddRange(PointData);
+
+            //    }
+
+            //    r = new MonthWarnR
+            //    {
+            //        LineData = LineDatas.ToArray(),
+            //        LineTime = LineTimes.ToArray(),
+            //        PointData = PointDatas.ToArray(),
+            //        //PointData = PointData.ToArray(),
+            //        //PointTime = PointTime.ToArray(),
+            //        //NormalData = normalData
+            //    };
+            //}
 
         }
 

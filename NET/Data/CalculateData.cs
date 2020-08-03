@@ -88,16 +88,23 @@ namespace Data
         {
             double[] newDatas = datas.ToArray();
 
-            double arr5 = ArrayStatistics.PercentileInplace(newDatas, 5);
-            double arr25 = ArrayStatistics.PercentileInplace(newDatas, 25);
-            double arr75 = ArrayStatistics.PercentileInplace(newDatas, 75);
-            double arr95 = ArrayStatistics.PercentileInplace(newDatas, 95);
+            double q1 = ArrayStatistics.LowerQuartileInplace(newDatas);
+            double q3 = ArrayStatistics.UpperQuartileInplace(newDatas);
+
+            double iqr = q3 - q1;
+            if (iqr < 3)
+            {
+                iqr = 3;
+            }
+
+            double arrLower = q1 - 1.5 * (iqr);
+            double arrUpper = q3 + 1.5 * (iqr);
 
             double[] arr = {
-                arr5,
-                arr25,
-                arr75,
-                arr95,
+                arrLower,
+                q1,
+                q3,
+                arrUpper,
             };
 
             return arr;
@@ -227,9 +234,7 @@ namespace Data
         public List<StartEndTime> CutTimes(List<DateTime?> times, int aWindow = 14)
         {
             List<StartEndTime> startEndTimes = new List<StartEndTime>();
-
             int a = 0;
-
             while ((times.Count / aWindow) > a)
             {
                 StartEndTime startEndTime = new StartEndTime
@@ -240,9 +245,7 @@ namespace Data
                 startEndTimes.Add(startEndTime);
                 a++;
             }
-
             return startEndTimes;
-
         }
 
         /// <summary>
@@ -256,6 +259,7 @@ namespace Data
 
         //   入睡时间模型  ps：起床时间模型    ok  ok  ok  异常问题
         //   传入入睡时间  和切割后的时间    输出趋势线的点以及对应的时间段  以及异常点和异常时间  
+
         public SleepTimeLineAndPoint GetSleepTimeLineAndPoint(List<TimeAndListClass> goSleepTimeList, List<DateTime?> endSleepData, int cWindow = 2, int aWindow = 14)
         {
 
@@ -365,6 +369,7 @@ namespace Data
             return sleepTimeLineAndPoint;
 
         }
+
     }
 }
 

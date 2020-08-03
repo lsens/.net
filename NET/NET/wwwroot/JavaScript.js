@@ -299,14 +299,14 @@ function func2() {
         dataType: "json",
         success: function (msg) {
             console.log(msg);
-            var xInterval;
 
+            //var xInterval;
             //对所有数据的x轴坐标进行省略
-            if (parseInt(vs4) == 13) {
-                xInterval = 10;
-            } else {
-                xInterval = 0;
-            };
+            //if (parseInt(vs4) == 13) {
+            //    xInterval = 10;
+            //} else {
+            //    xInterval = 0;
+            //};
 
             // 循环本次数据取最大值 判断颜色的渐变  
             
@@ -317,6 +317,8 @@ function func2() {
             var offset2 = 1;
             var color1 = 'pink';
 
+
+            // 面积颜色规定
             if (maxPointData > 50) {
                 offset1 = 1 - 20 / maxPointData;
             } else if (maxPointData < 10) {
@@ -365,7 +367,7 @@ function func2() {
                     },
                     axisLabel: {
                         rotate: 0,
-                        interval: xInterval
+                        interval: 0
                     },
                     data: msg.lineTime
                 },
@@ -406,26 +408,26 @@ function func2() {
                 }]
             };
 
-            if (parseInt(vs4) == 13) {
-                option.series = [{
-                    name: vs3 + '次数',
-                    //type: 'bar',
-                    type: 'line',
-                    data: msg.lineData,
-                    symbol: 'none',
-                    areaStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(
-                                0, 0, 0, 1,
-                                colorArray
-                            )
-                        }
-                    },
+            //if (parseInt(vs4) == 13) {
+            //    option.series = [{
+            //        name: vs3 + '次数',
+            //        //type: 'bar',
+            //        type: 'line',
+            //        data: msg.lineData,
+            //        symbol: 'none',
+            //        areaStyle: {
+            //            normal: {
+            //                color: new echarts.graphic.LinearGradient(
+            //                    0, 0, 0, 1,
+            //                    colorArray
+            //                )
+            //            }
+            //        },
 
-                    barMaxWidth: 40,
-                    smooth: true
-                }]
-            };
+            //        barMaxWidth: 40,
+            //        smooth: true
+            //    }]
+            //};
 
             // 使用刚指定的配置项和数据显示图表。
             myChart4.setOption(option);
