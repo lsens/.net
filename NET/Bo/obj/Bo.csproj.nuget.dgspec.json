@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HC\\Desktop\\NET\\Bo\\Bo.csproj": {}
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\Bo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HC\\Desktop\\NET\\Bo\\Bo.csproj": {
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\Bo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Bo\\Bo.csproj",
+        "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\Bo.csproj",
         "projectName": "Bo",
-        "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Bo\\Bo.csproj",
+        "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\Bo.csproj",
         "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Bo\\obj\\",
+        "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,14 +27,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj"
+              "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {
+                "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj"
               },
-              "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj": {
-                "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj"
+              "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj": {
+                "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj"
               },
-              "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj": {
-                "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj"
+              "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj": {
+                "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj"
               }
             }
           }
@@ -48,6 +48,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -72,14 +76,14 @@
         }
       }
     },
-    "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\obj\\",
+        "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -110,6 +114,10 @@
               "target": "Package",
               "version": "[1.2.2, )"
             },
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[12.0.3, )"
@@ -134,14 +142,14 @@
         }
       }
     },
-    "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj": {
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj",
+        "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj",
         "projectName": "Statistical",
-        "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj",
+        "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj",
         "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\obj\\",
+        "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -167,6 +175,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -186,14 +200,14 @@
         }
       }
     },
-    "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj": {
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj",
+        "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj",
         "projectName": "Tools",
-        "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj",
+        "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj",
         "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Tools\\obj\\",
+        "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -209,11 +223,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj"
+              "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {
+                "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj"
               },
-              "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj": {
-                "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj"
+              "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj": {
+                "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj"
               }
             }
           }
@@ -226,6 +240,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

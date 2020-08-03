@@ -387,6 +387,7 @@ namespace Bo
             List<double> minuteCount = timeCounts.Counts;
             List<DateTime> minuteTime = timeCounts.Times;
 
+            // 调用模块 输入数据和时间  获取点线异常 等指标
             MinuteR r = mt.BasicModule(minuteCount, minuteTime, 5, 30);
 
             return r;

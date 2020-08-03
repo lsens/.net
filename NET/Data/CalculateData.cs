@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using MathNet.Numerics.Statistics;
 
 namespace Data
 {
@@ -81,6 +82,27 @@ namespace Data
             return cutCalculateList;
 
         }
+
+        //  使用Math.net 实现9  25  75  95  分位数  
+        public double[] DataPercentileInplace(List<double> datas)
+        {
+            double[] newDatas = datas.ToArray();
+
+            double arr5 = ArrayStatistics.PercentileInplace(newDatas, 5);
+            double arr25 = ArrayStatistics.PercentileInplace(newDatas, 25);
+            double arr75 = ArrayStatistics.PercentileInplace(newDatas, 75);
+            double arr95 = ArrayStatistics.PercentileInplace(newDatas, 95);
+
+            double[] arr = {
+                arr5,
+                arr25,
+                arr75,
+                arr95,
+            };
+
+            return arr;
+        }
+
         //   数据分箱  正常的 分箱算法  
         public double[] PercentileData8(List<double?> adatas)
         {

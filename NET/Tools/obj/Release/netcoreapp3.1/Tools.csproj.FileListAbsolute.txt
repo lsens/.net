@@ -12,3 +12,16 @@ C:\Users\HC\Desktop\NET\Tools\obj\Release\netcoreapp3.1\Tools.AssemblyInfo.cs
 C:\Users\HC\Desktop\NET\Tools\obj\Release\netcoreapp3.1\Tools.csproj.CopyComplete
 C:\Users\HC\Desktop\NET\Tools\obj\Release\netcoreapp3.1\Tools.dll
 C:\Users\HC\Desktop\NET\Tools\obj\Release\netcoreapp3.1\Tools.pdb
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Tools.deps.json
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Tools.dll
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Tools.pdb
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Data.dll
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Statistical.dll
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Data.pdb
+C:\Users\HC\Desktop\git\.net\NET\Tools\bin\Release\netcoreapp3.1\Statistical.pdb
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.csprojAssemblyReference.cache
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.AssemblyInfoInputs.cache
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.AssemblyInfo.cs
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.csproj.CopyComplete
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.dll
+C:\Users\HC\Desktop\git\.net\NET\Tools\obj\Release\netcoreapp3.1\Tools.pdb

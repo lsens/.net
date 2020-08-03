@@ -54,6 +54,15 @@
           "lib/netstandard2.0/NPOI.OpenXmlFormats.dll": {}
         }
       },
+      "MathNet.Numerics/4.12.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MathNet.Numerics.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MathNet.Numerics.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/2.0.0": {
         "type": "package",
         "compile": {
@@ -155,6 +164,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "DotNetCore.NPOI": "1.2.2",
+          "MathNet.Numerics": "4.12.0",
           "Newtonsoft.Json": "12.0.3"
         },
         "compile": {
@@ -167,6 +177,9 @@
       "Statistical/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "MathNet.Numerics": "4.12.0"
+        },
         "compile": {
           "bin/placeholder/Statistical.dll": {}
         },
@@ -227,6 +240,26 @@
         "dotnetcore.npoi.openxmlformats.nuspec",
         "lib/net461/NPOI.OpenXmlFormats.dll",
         "lib/netstandard2.0/NPOI.OpenXmlFormats.dll"
+      ]
+    },
+    "MathNet.Numerics/4.12.0": {
+      "sha512": "U6R74mc1PHD3HbbevY5Z6AS07toye0PBooKPpCyD9sCc5HDPlRl+lmiWl+zy8L7IEHIH0Bvkx1sVqBY++5X5eA==",
+      "type": "package",
+      "path": "mathnet.numerics/4.12.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net40/MathNet.Numerics.dll",
+        "lib/net40/MathNet.Numerics.xml",
+        "lib/net461/MathNet.Numerics.dll",
+        "lib/net461/MathNet.Numerics.xml",
+        "lib/netstandard1.3/MathNet.Numerics.dll",
+        "lib/netstandard1.3/MathNet.Numerics.xml",
+        "lib/netstandard2.0/MathNet.Numerics.dll",
+        "lib/netstandard2.0/MathNet.Numerics.xml",
+        "mathnet.numerics.4.12.0.nupkg.sha512",
+        "mathnet.numerics.nuspec"
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
@@ -436,6 +469,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Data >= 1.0.0",
+      "MathNet.Numerics >= 4.12.0",
       "Statistical >= 1.0.0"
     ]
   },
@@ -445,11 +479,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj",
+      "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj",
       "projectName": "Tools",
-      "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Tools\\Tools.csproj",
+      "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\Tools.csproj",
       "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Tools\\obj\\",
+      "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Tools\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -465,11 +499,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj"
+            "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj"
             },
-            "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj": {
-              "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj"
+            "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj": {
+              "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj"
             }
           }
         }
@@ -482,6 +516,12 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "dependencies": {
+          "MathNet.Numerics": {
+            "target": "Package",
+            "version": "[4.12.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

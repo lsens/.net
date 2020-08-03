@@ -1,11 +1,44 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "MathNet.Numerics/4.12.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MathNet.Numerics.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MathNet.Numerics.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MathNet.Numerics/4.12.0": {
+      "sha512": "U6R74mc1PHD3HbbevY5Z6AS07toye0PBooKPpCyD9sCc5HDPlRl+lmiWl+zy8L7IEHIH0Bvkx1sVqBY++5X5eA==",
+      "type": "package",
+      "path": "mathnet.numerics/4.12.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net40/MathNet.Numerics.dll",
+        "lib/net40/MathNet.Numerics.xml",
+        "lib/net461/MathNet.Numerics.dll",
+        "lib/net461/MathNet.Numerics.xml",
+        "lib/netstandard1.3/MathNet.Numerics.dll",
+        "lib/netstandard1.3/MathNet.Numerics.xml",
+        "lib/netstandard2.0/MathNet.Numerics.dll",
+        "lib/netstandard2.0/MathNet.Numerics.xml",
+        "mathnet.numerics.4.12.0.nupkg.sha512",
+        "mathnet.numerics.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "MathNet.Numerics >= 4.12.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\HC\\.nuget\\packages\\": {}
@@ -13,11 +46,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj",
+      "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj",
       "projectName": "Statistical",
-      "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj",
+      "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj",
       "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\obj\\",
+      "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +76,12 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "dependencies": {
+          "MathNet.Numerics": {
+            "target": "Package",
+            "version": "[4.12.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

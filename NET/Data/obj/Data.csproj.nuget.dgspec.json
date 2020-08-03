@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {}
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj": {
+    "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\HC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HC\\Desktop\\NET\\Data\\obj\\",
+        "outputPath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,10 @@
             "DotNetCore.NPOI": {
               "target": "Package",
               "version": "[1.2.2, )"
+            },
+            "MathNet.Numerics": {
+              "target": "Package",
+              "version": "[4.12.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

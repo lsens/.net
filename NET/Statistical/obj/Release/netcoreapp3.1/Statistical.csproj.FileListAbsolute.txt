@@ -7,3 +7,11 @@ C:\Users\HC\Desktop\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.Assemb
 C:\Users\HC\Desktop\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.AssemblyInfo.cs
 C:\Users\HC\Desktop\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.dll
 C:\Users\HC\Desktop\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.pdb
+C:\Users\HC\Desktop\git\.net\NET\Statistical\bin\Release\netcoreapp3.1\Statistical.deps.json
+C:\Users\HC\Desktop\git\.net\NET\Statistical\bin\Release\netcoreapp3.1\Statistical.dll
+C:\Users\HC\Desktop\git\.net\NET\Statistical\bin\Release\netcoreapp3.1\Statistical.pdb
+C:\Users\HC\Desktop\git\.net\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.csprojAssemblyReference.cache
+C:\Users\HC\Desktop\git\.net\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.AssemblyInfoInputs.cache
+C:\Users\HC\Desktop\git\.net\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.AssemblyInfo.cs
+C:\Users\HC\Desktop\git\.net\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.dll
+C:\Users\HC\Desktop\git\.net\NET\Statistical\obj\Release\netcoreapp3.1\Statistical.pdb

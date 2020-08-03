@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "hWJmbqcHJBcL2tXNiDQWsGy6kPuKexSuLBmzIQ12jWszn4QRWw/78S3Y3S1O9DmIFcrKU1Ulh5vnEcC0zxrcZw==",
+  "dgSpecHash": "PTSNHTBeB4JK63Pdw+w1lRoLvZyYovhyYrzjJ7MrnNFjsPJfnLyUECxQZzxOnMJVXgJdiB0C7rgIEgwso+HH7w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HC\\Desktop\\NET\\Bo\\Bo.csproj",
+  "projectFilePath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Bo\\Bo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HC\\.nuget\\packages\\dotnetcore.npoi\\1.2.2\\dotnetcore.npoi.1.2.2.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\dotnetcore.npoi.core\\1.2.2\\dotnetcore.npoi.core.1.2.2.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\dotnetcore.npoi.openxml4net\\1.2.2\\dotnetcore.npoi.openxml4net.1.2.2.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\dotnetcore.npoi.openxmlformats\\1.2.2\\dotnetcore.npoi.openxmlformats.1.2.2.nupkg.sha512",
+    "C:\\Users\\HC\\.nuget\\packages\\mathnet.numerics\\4.12.0\\mathnet.numerics.4.12.0.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
     "C:\\Users\\HC\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ecJsMMlsz22AmrvpNsGpjnzBV2y60e5xr1KRTV7+yeatvJ8Qj1+DWglE1Iu6iin21azHFZ6Fl270fdjJymKmLQ==",
+  "dgSpecHash": "h9pkRu7+2S903pPIXMaynXa2rDEU1XNoXwtlGcgejFOobD7S4r9kX+FD3WGeVWQr6KOmCvRDhHKLvaxjfpafzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HC\\Desktop\\NET\\Statistical\\Statistical.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\HC\\Desktop\\git\\.net\\NET\\Statistical\\Statistical.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HC\\.nuget\\packages\\mathnet.numerics\\4.12.0\\mathnet.numerics.4.12.0.nupkg.sha512"
+  ],
   "logs": []
 }
