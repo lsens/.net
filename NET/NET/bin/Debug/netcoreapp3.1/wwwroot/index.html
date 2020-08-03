@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>综合数据分析</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="echarts.min.js"></script>
+</head>
+<body>
+    
+    <div style="height:60px; width:100%"></div>
+
+    <div style="position:fixed; top:10px; height:30px;width:100%;">
+        <div style="width:300px; float:left">
+            <select id="selectid" onchange="if (selectid2.value != 'none') { func(); } if (selectid2.value != 'none' && selectid3.value != 'none') { func2(); }">
+                <option value="none" selected disabled hidden>请选择选项</option>
+                <option value="佴老师">佴老师</option>
+                <option value="洪老师">洪老师</option>
+                <option value="张华刚">张华刚</option>
+                <option value="严崇德">严崇德</option>
+                <option value="周紫">周紫</option>
+                <option value="卜金贵">卜金贵</option>
+            </select>
+        </div>
+        <div style="width:300px; float:left">
+            <select id="selectid2" onchange="if (selectid.value != 'none') { func(); } if (selectid.value != 'none' && selectid3.value != 'none') { func2(); }">
+                <option value="none" selected disabled hidden>请选择选项</option>
+                <option value="1">心率异常</option>
+                <option value="2">呼吸异常</option>
+                <option value="3">咳嗽</option>
+            </select>
+        </div>
+        <div style="float:left">
+            <div style="width:300px; float:left">
+                <select id="selectid3" onchange="if (selectid.value != 'none' && selectid2.value != 'none') { func2(); }">
+                    <option value="none" selected disabled hidden>请选择月份</option>
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                    <option value="13">所有月份</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div id="main1" style="width: 600px;height:400px; float:left;"></div>
+        <div id="main2" style="width: 600px;height:400px; float:left;"></div>
+        <div id="main3" style="width: 600px;height:400px; float:left;"></div>
+        <div id="main4" style="width: 600px;height:400px; float:left; display:none">
+
+            <div id="div1" style="margin:50px 50px;">
+                从 <font id="stime">2020/2/15</font> 到 <font id="etime">2020/6/6</font> 经常在 <font id="time1" color='red'>18</font> 点和 <font id="time2" color='red'>0</font> 点入睡
+                <br /><br />异常情况 在 2020/3/5  <font id="time3" color='red'>20</font> 点入睡
+            </div>
+
+            <div id="div2" style="margin:30px 50px;">
+                <font id="vs3"> 心率异常 </font>次数正常区间在 <font id="normalData1" color='red'> 4 </font>-<font id="normalData2" color='red'> 16 </font> 次<br /><br />
+                出现的时间段为 <font id="stime1">20</font> 和  <font id="etime1">20</font><br /><br />
+                变化的幅度分别为 <font id="data1" color='red'>20</font> 和 <font id="data2" color='red'>20</font>
+            </div>
+        </div>
+        <div id="main5" style="width: 1200px;height:400px; float:left;"></div>
+        <div id="main6" style="width: 900px;height:400px; float:left;"></div>
+        <div id="main7" style="width: 900px;height:400px; float:left;"></div>
+    </div>
+        <script type="text/javascript" src="JavaScript.js"></script>
+
+</body>
+</html>
+
+
+

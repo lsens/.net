@@ -1,0 +1,9 @@
+C:\Users\HC\Desktop\NET\Data\bin\Debug\netcoreapp3.1\Data.deps.json
+C:\Users\HC\Desktop\NET\Data\bin\Debug\netcoreapp3.1\Data.dll
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfoInputs.cache
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfo.cs
+C:\Users\HC\Desktop\NET\Data\bin\Debug\netcoreapp3.1\Data.pdb
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.dll
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.pdb
+C:\Users\HC\Desktop\NET\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache
