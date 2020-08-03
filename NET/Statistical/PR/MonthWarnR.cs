@@ -11,6 +11,7 @@ namespace Statistical.PR
         public double[] PointData { get; set; }
         public int[] NormalData { get; set; }
         public int[] AbnormalData { get; set; }
-
+        public int[] AbPointTime { get; set; }
+        public int[] AbPointData { get; set; }
     }
 }

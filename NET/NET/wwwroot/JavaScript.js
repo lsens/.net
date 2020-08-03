@@ -300,6 +300,9 @@ function func2() {
         success: function (msg) {
             console.log(msg);
 
+            //abPointData
+            //abPointTime
+
             //var xInterval;
             //对所有数据的x轴坐标进行省略
             //if (parseInt(vs4) == 13) {
@@ -401,9 +404,9 @@ function func2() {
                             )
                         }
                     },
-
                     barMaxWidth: 40,
-                    smooth: true
+                    smooth: true,
+
 
                 }]
             };
