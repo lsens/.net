@@ -314,12 +314,10 @@ function func2() {
             // 循环本次数据取最大值 判断颜色的渐变  
             
             var maxPointData = Math.max.apply(null, msg.pointData);
-
             var offset0 = 0;
             var offset1 = 0;
             var offset2 = 1;
             var color1 = 'pink';
-
 
             // 面积颜色规定
             if (maxPointData > 50) {
@@ -395,7 +393,7 @@ function func2() {
                     //type: 'bar',
                     type: 'line',
                     data: msg.lineData,
-
+                    symbol: "circle",
                     areaStyle: {
                         normal: {
                             color: new echarts.graphic.LinearGradient(
@@ -406,8 +404,26 @@ function func2() {
                     },
                     barMaxWidth: 40,
                     smooth: true,
-
-
+                    lineStyle: {
+                        normal: {
+                            color: 'red',
+                            width: 1
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: function (param) { //拐点颜色
+                                var itemColor = 'green';
+                                for (var i = 0; i < msg.abPointTime.length; i++) {
+                                    if (param.name == msg.abPointTime[i]) {
+                                        itemColor = 'red';
+                                    }
+                                }
+                                return itemColor
+                            },
+                        }
+                    },
+                    symbolSize: 8
                 }]
             };
 
