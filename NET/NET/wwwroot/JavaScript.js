@@ -312,7 +312,7 @@ function func2() {
             //};
 
             // 循环本次数据取最大值 判断颜色的渐变  
-            
+
             var maxPointData = Math.max.apply(null, msg.pointData);
             var offset0 = 0;
             var offset1 = 0;

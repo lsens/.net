@@ -6,11 +6,11 @@ namespace Statistical.PR
 {
     public class P
     {
-        public string data { get; set; }
-        public int status { get; set; }
-        public int year { get; set; }
-        public int month { get; set; }
-        public int day { get; set; }
-
+        public string Name { get; set; }
+        public int Status { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Time { get; set; }
     }
 }

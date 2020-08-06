@@ -25,7 +25,7 @@ namespace NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetData([FromBody]Statistical.PR.P p)
+        public IActionResult GetData([FromBody]Statistical.PR.TestP p)
         {
             if (p.status == 0)
             {

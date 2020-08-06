@@ -32,7 +32,7 @@ namespace Bo
 
     public class GetCount
     {
-        public static R GetR(P p)
+        public static TestR GetR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
             string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
@@ -57,7 +57,7 @@ namespace Bo
             //  入睡时间模型
             SleepTimeLineAndPoint sleepTimeLineAndPoint = calculateData.GetSleepTimeLineAndPoint(timeAndListClass, endSleepData, 2, 14);
 
-            var r = new R
+            var r = new TestR
             {
                 LineData = sleepTimeLineAndPoint.LineData.ToArray(),
                 LineTime = sleepTimeLineAndPoint.LineTime.ToArray(),
@@ -69,7 +69,7 @@ namespace Bo
             return r;
         }
 
-        public static WarnR GetWarnR(P p)
+        public static WarnR GetWarnR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
             string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
@@ -127,7 +127,7 @@ namespace Bo
             return r;
         }
 
-        public static DayR GetDayR(P p)
+        public static DayR GetDayR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
             string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
@@ -241,7 +241,7 @@ namespace Bo
             return r;
         }
 
-        public static MonthWarnR GetMonthR(P p)
+        public static MonthWarnR GetMonthR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
             string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
@@ -278,7 +278,6 @@ namespace Bo
                     CutCalculateList monthClist = cd.CutCalculateData(monthlist, 4, 24);
                     List<double> LineDatas = dc.GetJsonDataCount(monthData);
 
-
                     if (dataStatus == 3)
                     {
                         monthlist = dc.GetNewDayCount(monthData, 1);
@@ -301,7 +300,7 @@ namespace Bo
                         if (LineDatas[j] > abnormalData[1])
                         {
                             abPointData.Add((int)LineDatas[j]);
-                            abPointTime.Add((int)monthTime[j]);
+                            abPointTime.Add(monthTime[j]);
                         }
                     }
 
@@ -324,7 +323,7 @@ namespace Bo
 
         }
 
-        public static MinuteR GetMinuteR(P p) 
+        public static MinuteR GetMinuteR(TestP p) 
         {
             ReadExcel rd = new ReadExcel();
             string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));

@@ -236,7 +236,6 @@ namespace Data
                     }
                 }
                 hourList.AddRange(dayWarnCount);
-
             }
             
             return hourList;
