@@ -114,7 +114,7 @@ namespace Data
     {
         public int Year { get; set; }
         public int Month { get; set; }
-        public List<int> MonthTime { get; set; }
+        public List<DateTime> MonthTime { get; set; }
         public List<string> MonthData { get; set; }
 
     }

@@ -60,24 +60,24 @@ namespace Tools
 
         }
 
-        public R ReturnModule(List<string> jsonDatas, List<DateTime> times, int cWindow = 2, int aWindow = 14, int dataStatus = 0) 
+        public R ReturnModule(List<string> jsonDatas, List<DateTime> times, int timeSpan = 1, int dataStatus = 0) 
         {
 
             DataTools ts = new DataTools();
-            ModuleTools mt = new ModuleTools();
             DataCount dc = new DataCount();
             CalculateData cd = new CalculateData();
 
-            List<double> cDatas = dc.GetNewDayCount(jsonDatas);
-            CutCalculateList bDatas = cd.CutCalculateData(cDatas, cWindow, aWindow);
-            //  咳嗽特殊情况
-            if (dataStatus == 3)
-            {
-                cDatas = dc.GetNewDayCount(jsonDatas, 1);
-                bDatas = cd.CutCalculateData(cDatas, cWindow, aWindow);
-            }
+            int[] windows = ts.GetWindow(timeSpan);
+            List<double> cDatas = new List<double>();
 
-            List<double> aDatas = dc.GetJsonDataCount(jsonDatas);
+            if (timeSpan == 2)
+            {
+                cDatas = dc.GetNewDayCount(jsonDatas, dataStatus);
+            }
+            
+            CutCalculateList bDatas = cd.CutCalculateData(cDatas, windows[0], windows[1]);
+         
+            List<double> aDatas = dc.GetJsonDataCount(jsonDatas, dataStatus);
 
             List<double?> monthCAClist = bDatas.AmplitudeCList;
 
@@ -88,25 +88,24 @@ namespace Tools
             double[] abnormalData = { (int)Math.Round(arr[0]), (int)Math.Round(arr[3]) };
 
             List<double> abPointData = new List<double>();
-            List<int> abPointTime = new List<int>();
+            List<DateTime> abPointTime = new List<DateTime>();
 
             for (int j = 0; j < aDatas.Count; j++)
             {
                 if (aDatas[j] > abnormalData[1])
                 {
                     abPointData.Add((int)aDatas[j]);
-                    abPointTime.Add(times[j].Day);
+                    abPointTime.Add(times[j]);
                 }
             }
 
-            R r = new R();
-            r = new R
+            R r = new R
             {
                 LineData = ttList.ToArray(),
-                LineTime = times.Select(x => x.ToString()).ToArray(),
+                LineTime = times.Select(x => x.ToString("yyyy-MM-dd")).ToArray(),
                 PointData = aDatas.ToArray(),
                 AbPointData = abPointData.ToArray(),
-                AbPointTime = abPointTime.Select(x => x.ToString()).ToArray(),
+                AbPointTime = abPointTime.Select(x => x.ToString("yyyy-MM-dd")).ToArray(),
                 NormalData = normalData,
                 AbnormalData = abnormalData.ToArray()
             };

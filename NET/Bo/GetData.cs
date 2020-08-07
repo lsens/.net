@@ -35,8 +35,7 @@ namespace Bo
         public static TestR GetR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
-            string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
-            List<ExcelData> excelDatas = rd.ImportExcel(filepath);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
             List<DateTime?> startSleepData;
             List<DateTime?> endSleepData;
@@ -72,8 +71,7 @@ namespace Bo
         public static WarnR GetWarnR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
-            string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
-            List<ExcelData> excelDatas = rd.ImportExcel(filepath);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
             List<DateTime?> endSleepData;
 
@@ -127,26 +125,13 @@ namespace Bo
             return r;
         }
 
-        public static DayR GetDayR(TestP p)
+        public static DayR GetWeekDayR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
-            string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
-            List<ExcelData> excelDatas = rd.ImportExcel(filepath);
-            List<string> heartWarnData;
-            List<string> breathWarnsData;
-            List<string> coughJsonData;
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
             List<DateTime?> startSleepData;
             List<DateTime?> endSleepData;
 
-            heartWarnData = excelDatas
-                .Select(x => x.HeartWarnData)
-                .ToList();
-            breathWarnsData = excelDatas
-                .Select(x => x.BreathWarnsData)
-                .ToList();
-            coughJsonData = excelDatas
-                .Select(x => x.CoughJsonData)
-                .ToList();
             startSleepData = excelDatas
             .Select(x => x.StartSleepTime)
             .ToList();
@@ -185,18 +170,9 @@ namespace Bo
 
             List<DayCount> dayCount = new List<DayCount>();
 
-            if (p.status == 91)
-            {
-                dayCount = dc.GetDayCount(heartWarnData, endSleepData);
-            }
-            if (p.status == 92)
-            {
-                dayCount = dc.GetDayCount(breathWarnsData, endSleepData);
-            }
-            if (p.status == 93)
-            {
-                dayCount = dc.GetDayCount(coughJsonData, endSleepData, 1);
-            }
+            int dataStatus = p.status - 90;
+
+            dayCount = dc.GetDayCount(tools.GetDataType(p.data, dataStatus), endSleepData);
 
             List<DayCount> ortherWeek = new List<DayCount>();
             List<DayCount> monday = new List<DayCount>();
@@ -234,25 +210,20 @@ namespace Bo
                 }
             }
 
-            var r = new Statistical.PR.DayR
+            var r = new DayR
             {
                 weekCount = new int[] { monday.Count, ortherWeek.Count, friday.Count, weekend.Count, holiday.Count }
             };
             return r;
         }
 
-        public static MonthWarnR GetMonthR(TestP p)
+        public static R GetMonthR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
-            string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
-            List<ExcelData> excelDatas = rd.ImportExcel(filepath);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
-            List<DateTime?> startSleepData;
             List<DateTime?> endSleepData;
 
-            startSleepData = excelDatas
-            .Select(x => x.StartSleepTime)
-            .ToList();
             endSleepData = excelDatas
                 .Select(x => x.EndSleepTime)
                 .ToList();
@@ -260,74 +231,30 @@ namespace Bo
             DataTools tools = new DataTools();
             ModuleTools mt = new ModuleTools();
             DataCount dc = new DataCount();
-            CalculateData cd = new CalculateData();
 
             int dataStatus = p.status - 100;
+
             List<MonthCount> monthCount = dc.GetMonthTimeDataCount(endSleepData, tools.GetDataType(p.data, dataStatus));
 
-            MonthWarnR r = new MonthWarnR();
+            R r = new R();
 
             for (int i = 0; i < monthCount.Count; i++)
             {
                 if (monthCount[i].Month == p.month)
                 {
                     List<string> monthData = monthCount[i].MonthData;
-                    List<int> monthTime = monthCount[i].MonthTime;
-                    List<double> monthlist = dc.GetNewDayCount(monthData);
+                    List<DateTime> monthTime = monthCount[i].MonthTime;
 
-                    CutCalculateList monthClist = cd.CutCalculateData(monthlist, 4, 24);
-                    List<double> LineDatas = dc.GetJsonDataCount(monthData);
-
-                    if (dataStatus == 3)
-                    {
-                        monthlist = dc.GetNewDayCount(monthData, 1);
-                        monthClist = cd.CutCalculateData(monthlist, 4, 24);
-                    }
-                    
-                    List<double?> monthCAClist = monthClist.AmplitudeCList;
-
-                    List<double> ttList = monthClist.TrendCList.Select(x => x.Value).ToList();
-
-                    double[] arr = cd.DataPercentileInplace(LineDatas);
-                    int[] normalData = { (int)Math.Round(arr[1]), (int)Math.Round(arr[2]) };
-                    int[] abnormalData = { (int)Math.Round(arr[0]), (int)Math.Round(arr[3]) };
-
-                    List<int> abPointData = new List<int>();
-                    List<int> abPointTime = new List<int>();
-
-                    for (int j = 0; j < LineDatas.Count; j++)
-                    {
-                        if (LineDatas[j] > abnormalData[1])
-                        {
-                            abPointData.Add((int)LineDatas[j]);
-                            abPointTime.Add(monthTime[j]);
-                        }
-                    }
-
-                    // MinuteR a = mt.BasicModule(monthlist, monthTime, 4, 24);
-
-                    r = new MonthWarnR
-                    {
-                        LineData = ttList.ToArray(),
-                        LineTime = monthTime.ToArray(),
-                        PointData = LineDatas.ToArray(),
-                        AbPointData = abPointData.ToArray(),
-                        AbPointTime = abPointTime.ToArray(),
-                        NormalData = normalData,
-                        AbnormalData = abnormalData.ToArray()
-                    };
+                    r = mt.ReturnModule(monthData, monthTime, 2, dataStatus);
                 }
             }
-
             return r;
-
         }
 
         public static MinuteR GetMinuteR(TestP p) 
         {
             ReadExcel rd = new ReadExcel();
-            string filepath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", p.data));
-            List<ExcelData> excelDatas = rd.ImportExcel(filepath);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
             DataCount dc = new DataCount();
             ModuleTools mt = new ModuleTools();

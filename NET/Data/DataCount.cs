@@ -21,7 +21,7 @@ namespace Data
                 List<JsonData> jsonDatas = JsonConvert.DeserializeObject<List<JsonData>>(jsonData[i]);
                 double count = 0;
 
-                if (status == 1)
+                if (status == 3)
                 {
                     //  循环 咳嗽数据 取出 等于3 的状态  
                     if (jsonDatas.Count != 0)
@@ -41,7 +41,6 @@ namespace Data
                 }
                 countList.Add(count);
             }
-
             return countList;
         }
 
@@ -63,19 +62,7 @@ namespace Data
 
                     for (int j = 0; j < jsonDatas.Count; j++)
                     {
-                        //  两周   对应两天trend 后求 各个指标
-
-                        //  构建一个 存储 每天  24 小时 的 异常 
-
-                        //   7个  trend  求 a  w  p  
-
-                        //  24小时 对应两时trend 后求 各个指标
-
-                        //   6个  trend  求 a  w  p
-
-                        //  存储   每个小时 异常出现的次数 
-
-                        if (status == 1)
+                        if (status == 3)
                         {
                             if (jsonDatas[j].Status == 3)
                             {
@@ -219,7 +206,7 @@ namespace Data
                 {
                     for (int j = 0; j < jsonDatas.Count; j++)
                     {
-                        if (status == 1)
+                        if (status == 3)
                         {
                             if (jsonDatas[j].Status == 3)
                             {
@@ -241,6 +228,7 @@ namespace Data
             return hourList;
 
         }
+        
         //  获取时间和数据  进行切割 按月份切割
         public List<MonthCount> GetMonthTimeDataCount(List<DateTime?> times, List<string> datas)
         {
@@ -252,14 +240,14 @@ namespace Data
                 Year = times[0].Value.Year,
                 Month = times[0].Value.Month,
                 MonthData = new List<string>(),
-                MonthTime = new List<int>(),
+                MonthTime = new List<DateTime>(),
             };
 
             for (int i = 0; i < length; i++)
             {
                 if (times[i].Value.Year == monthCount.Year && times[i].Value.Month == monthCount.Month)
                 {
-                    monthCount.MonthTime.Add(times[i].Value.Day);
+                    monthCount.MonthTime.Add(times[i].Value);
                     monthCount.MonthData.Add(datas[i]);
                 }
                 else
@@ -270,9 +258,9 @@ namespace Data
                         Year = times[i].Value.Year,
                         Month = times[i].Value.Month,
                         MonthData = new List<string>(),
-                        MonthTime = new List<int>(),
+                        MonthTime = new List<DateTime>(),
                     };
-                    monthCount.MonthTime.Add(times[i].Value.Day);
+                    monthCount.MonthTime.Add(times[i].Value);
                     monthCount.MonthData.Add(datas[i]);
                 }
             }

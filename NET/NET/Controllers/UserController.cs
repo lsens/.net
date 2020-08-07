@@ -44,7 +44,7 @@ namespace NET.Controllers
             }
             else if (p.status > 90)
             {
-                var r = Bo.GetCount.GetDayR(p);
+                var r = Bo.GetCount.GetWeekDayR(p);
                 return Ok(r);
             }
             else

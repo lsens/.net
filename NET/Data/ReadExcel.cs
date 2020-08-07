@@ -43,8 +43,10 @@ namespace Data
         }
 
         //  读取数据  
-        public List<ExcelData> ImportExcel(string filePath)
+        public List<ExcelData> ImportExcel(string name)
         {
+            string filePath = Path.Combine("wwwroot", string.Format("{0}年后正常数据.xlsx", name));
+
             if (string.IsNullOrEmpty(filePath))
             {
                 return null;
