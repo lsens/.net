@@ -106,7 +106,7 @@ namespace Data
                 q3,
                 arrUpper,
             };
-
+            
             return arr;
         }
 

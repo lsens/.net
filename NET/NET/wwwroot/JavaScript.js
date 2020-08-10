@@ -295,7 +295,7 @@ function func2() {
         type: "POST",
         url: "http://localhost:5000/api/User/GetData",
         contentType: "application/json",
-        data: JSON.stringify({ "data": vs, "status": 100 + parseInt(vs2), "month": parseInt(vs4)}),
+        data: JSON.stringify({ "data": vs, "status": 200 + parseInt(vs2), "month": parseInt(vs4)}),
         dataType: "json",
         success: function (msg) {
             console.log(msg);
@@ -473,7 +473,7 @@ function func2() {
                         type: "POST",
                         url: "http://localhost:5000/api/User/GetData",
                         contentType: "application/json",
-                        data: JSON.stringify({ "data": vs, "status": 201, "month": parseInt(vs4), "day": parseInt(params.name) }),
+                        data: JSON.stringify({ "data": vs, "status": 101, "month": parseInt(vs4), "day": parseInt(params.name) }),
                         dataType: "json",
                         success: function (msg) {
                             console.log(msg)
@@ -534,7 +534,7 @@ function func2() {
                         type: "POST",
                         url: "http://localhost:5000/api/User/GetData",
                         contentType: "application/json",
-                        data: JSON.stringify({ "data": vs, "status": 202, "month": parseInt(vs4), "day": parseInt(params.name) }),
+                        data: JSON.stringify({ "data": vs, "status": 102, "month": parseInt(vs4), "day": parseInt(params.name) }),
                         dataType: "json",
                         success: function (msg) {
                             console.log(msg.pointData)

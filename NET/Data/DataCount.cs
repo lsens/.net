@@ -9,7 +9,7 @@ namespace Data
     public class DataCount
     {
 
-        //  接收 json格式  输出 次数  默认不传参status取0  咳嗽取 1
+        //  接收 json格式  输出 次数  默认不传参status取0  咳嗽取 3
         public List<double> GetJsonDataCount(List<string> jsonData, int status = 0)
         {
 
@@ -189,8 +189,58 @@ namespace Data
 
             return goSleepList;
         }
-        //   每月 按天 函数处理 
-        public List<double> GetNewDayCount(List<string> jsonData, int status = 0)
+
+
+        //   数据最终处理模块  
+        //   日
+        public TimeCounts GetDayCount(List<JsonData> datas, DateTime startTime, DateTime endTime, int statu = 0)
+        {
+            int i = 0;
+            List<double> counts = new List<double>();
+            List<DateTime> minutes = new List<DateTime>();
+
+            List<JsonData> cData = new List<JsonData>();
+
+            if (statu == 3)
+            {
+                cData = datas.Where(x => x.Status == 3).ToList();
+            }
+            else
+            {
+                cData = datas;
+            }
+
+            while (startTime < endTime)
+            {
+                minutes.Add(startTime);
+                counts.Add(0);
+                startTime = startTime.AddMinutes(1);
+
+                while (i < cData.Count)
+                {
+                    string time = cData[i].Time[0];
+                    DateTime dateTime = Convert.ToDateTime(time);
+                    if (dateTime.TimeOfDay < startTime.TimeOfDay)
+                    {
+                        counts[^1]++;
+                        i++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            TimeCounts timeCount = new TimeCounts
+            {
+                Counts = counts,
+                Times = minutes
+            };
+            return timeCount;
+        }
+        //   月
+        public List<double> GetMonthCount(List<string> jsonData, int status = 0)
         {
 
             List<double> hourList = new List<double>();
@@ -228,7 +278,9 @@ namespace Data
             return hourList;
 
         }
-        
+
+
+
         //  获取时间和数据  进行切割 按月份切割
         public List<MonthCount> GetMonthTimeDataCount(List<DateTime?> times, List<string> datas)
         {
@@ -267,53 +319,8 @@ namespace Data
             monthCounts.Add(monthCount);
             return monthCounts;
         }
-        //  获取时间和数据  进行切割 按分钟切割
-        public TimeCounts GetMinuteTimeDataCount(List<JsonData> datas, DateTime startTime, DateTime endTime, int statu = 0)
-        {
-            int i = 0;
-            List<double> counts = new List<double>();
-            List<DateTime> minutes = new List<DateTime>();
 
-            List<JsonData> cData = new List<JsonData>();
 
-            if (statu == 1)
-            {
-                cData = datas.Where(x => x.Status == 1).ToList();
-            }
-            else
-            {
-                cData = datas;
-            }
-
-            while (startTime < endTime)
-            {
-                minutes.Add(startTime);
-                counts.Add(0);
-                startTime = startTime.AddMinutes(1);
-
-                while (i < cData.Count)
-                {
-                    string time = cData[i].Time[0];
-                    DateTime dateTime = Convert.ToDateTime(time);
-                    if (dateTime.TimeOfDay < startTime.TimeOfDay)
-                    {
-                        counts[^1]++;
-                        i++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-
-            TimeCounts timeCount = new TimeCounts
-            {
-                Counts = counts,
-                Times = minutes
-            };
-            return timeCount;
-        }
         //  获取睡眠分期数据  计算每天的深睡时长
         public List<double> GetDeepSleepTimeData(List<string> jsonData)
         {
@@ -335,7 +342,7 @@ namespace Data
             }
             return timeList;
         }
-           
+
     }
 }
 

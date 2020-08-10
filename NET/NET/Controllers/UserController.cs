@@ -34,12 +34,17 @@ namespace NET.Controllers
             }
             else if (p.status > 100 && p.status < 200)
             {
-                var r = Bo.GetCount.GetMonthR(p);
+                var r = Bo.GetCount.GetDayR(p);
                 return Ok(r);
             }
             else if (p.status > 200 && p.status < 300)
             {
-                var r = Bo.GetCount.GetMinuteR(p);
+                var r = Bo.GetCount.GetMonthR(p);
+                return Ok(r);
+            }
+            else if (p.status > 300 && p.status < 400)
+            {
+                var r = Bo.GetCount.GetYearR(p);
                 return Ok(r);
             }
             else if (p.status > 90)
@@ -55,8 +60,6 @@ namespace NET.Controllers
         }
     }
 }
-
-
 
 
 

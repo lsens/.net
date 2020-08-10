@@ -217,6 +217,50 @@ namespace Bo
             return r;
         }
 
+        public static R GetDayR(TestP p) 
+        {
+            ReadExcel rd = new ReadExcel();
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
+
+            DataCount dc = new DataCount();
+            ModuleTools mt = new ModuleTools();
+            CalculateData cd = new CalculateData();
+
+            //   时间段模型  也是 每天 的模型  
+            ExcelData excelData = excelDatas.Where(x => x.EndSleepTime.Value.Month == p.month && x.EndSleepTime.Value.Day == p.day).First();
+
+            int dataStatus = p.status - 100;
+
+            List<string> jsonDatas = new List<string>();
+            List<DateTime> times = new List<DateTime>();
+
+            string jsonData = "";
+
+            if (dataStatus == 1)
+            {
+                jsonData = excelData.HeartWarnData;
+            }
+            else if (dataStatus == 2)
+            {
+               jsonData = excelData.BreathWarnsData;
+            }
+            else if (dataStatus == 3)
+            {
+                jsonData = excelData.CoughJsonData;
+            }
+
+            jsonDatas.Add(jsonData);
+            times.Add(excelData.StartSleepTime.Value);
+            times.Add(excelData.EndSleepTime.Value);
+
+            R r = new R();
+
+            r = mt.ReturnModule(jsonDatas, times, 1, dataStatus);
+           
+            return r;
+
+        }
+
         public static R GetMonthR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
@@ -232,7 +276,7 @@ namespace Bo
             ModuleTools mt = new ModuleTools();
             DataCount dc = new DataCount();
 
-            int dataStatus = p.status - 100;
+            int dataStatus = p.status - 200;
 
             List<MonthCount> monthCount = dc.GetMonthTimeDataCount(endSleepData, tools.GetDataType(p.data, dataStatus));
 
@@ -248,59 +292,38 @@ namespace Bo
                     r = mt.ReturnModule(monthData, monthTime, 2, dataStatus);
                 }
             }
+            
             return r;
+
         }
 
-        public static MinuteR GetMinuteR(TestP p) 
+        //  跨度过大 数值累加  之间分箱 取异常 效果并不理想  考虑使用一开始的办法  
+        public static R GetYearR(TestP p) 
         {
             ReadExcel rd = new ReadExcel();
             List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
-            DataCount dc = new DataCount();
+            List<DateTime?> endSleepData;
+
+            endSleepData = excelDatas
+                .Select(x => x.EndSleepTime)
+                .ToList();
+
+            DataTools tools = new DataTools();
             ModuleTools mt = new ModuleTools();
-            CalculateData cd = new CalculateData();
+            DataCount dc = new DataCount();
 
-            //   时间段模型  也是 每天 的模型  
-            ExcelData excelData = excelDatas.Where(x => x.EndSleepTime.Value.Month == p.month && x.EndSleepTime.Value.Day == p.day).First();
+            int dataStatus = p.status - 300;
 
-            int dataStatus = p.status - 200;
+            List<string> datas = tools.GetDataType(p.data, dataStatus);
 
-            List<JsonData> jsonDatas1 = new List<JsonData>();
+            R r = new R();
 
-            if (dataStatus == 1)
-            {
-                jsonDatas1 = JsonConvert.DeserializeObject<List<JsonData>>(excelData.HeartWarnData);
-            }
-            else if (dataStatus == 2)
-            {
-               jsonDatas1 = JsonConvert.DeserializeObject<List<JsonData>>(excelData.BreathWarnsData);
-            }
-            else if (dataStatus == 3)
-            {
-                jsonDatas1 = JsonConvert.DeserializeObject<List<JsonData>>(excelData.CoughJsonData);
-            }
-
-            //  反序列化
-            TimeCounts timeCounts = new TimeCounts();
-            if (dataStatus == 3)
-            {
-                timeCounts = dc.GetMinuteTimeDataCount(jsonDatas1, excelData.StartSleepTime.Value, excelData.EndSleepTime.Value, 1);
-            }
-            else
-            {
-                timeCounts = dc.GetMinuteTimeDataCount(jsonDatas1, excelData.StartSleepTime.Value, excelData.EndSleepTime.Value);
-            }
-
-            List<double> minuteCount = timeCounts.Counts;
-            List<DateTime> minuteTime = timeCounts.Times;
-
-            // 调用模块 输入数据和时间  获取点线异常 等指标
-            MinuteR r = mt.BasicModule(minuteCount, minuteTime, 5, 30);
+            r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
 
             return r;
-
         }
-
     }
 }
+
 
