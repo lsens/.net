@@ -279,8 +279,6 @@ namespace Data
 
         }
 
-
-
         //  获取时间和数据  进行切割 按月份切割
         public List<MonthCount> GetMonthTimeDataCount(List<DateTime?> times, List<string> datas)
         {
@@ -319,7 +317,6 @@ namespace Data
             monthCounts.Add(monthCount);
             return monthCounts;
         }
-
 
         //  获取睡眠分期数据  计算每天的深睡时长
         public List<double> GetDeepSleepTimeData(List<string> jsonData)

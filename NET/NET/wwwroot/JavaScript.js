@@ -300,9 +300,6 @@ function func2() {
         success: function (msg) {
             console.log(msg);
 
-            //abPointData
-            //abPointTime
-
             //var xInterval;
             //对所有数据的x轴坐标进行省略
             //if (parseInt(vs4) == 13) {
@@ -331,6 +328,10 @@ function func2() {
                 { offset: offset1, color: color1 },
                 { offset: offset2, color: 'green' }
             ];
+
+            // 映射获取日期中的天
+
+            var lineTimeDay = msg.lineTime.map(a => a.slice(8, 10));
 
             var option = {
                 title: {
@@ -370,7 +371,7 @@ function func2() {
                         rotate: 0,
                         interval: 0
                     },
-                    data: msg.lineTime
+                    data: lineTimeDay
                 },
                 yAxis: {
                 },
@@ -415,7 +416,7 @@ function func2() {
                             color: function (param) { //拐点颜色
                                 var itemColor = 'green';
                                 for (var i = 0; i < msg.abPointTime.length; i++) {
-                                    if (param.name == msg.abPointTime[i]) {
+                                    if (param.name == msg.abPointTime[i].slice(8,10)) {
                                         itemColor = 'red';
                                     }
                                 }
