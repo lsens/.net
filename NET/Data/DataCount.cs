@@ -189,8 +189,6 @@ namespace Data
 
             return goSleepList;
         }
-
-
         //   数据最终处理模块  
         //   日
         public TimeCounts GetDayCount(List<JsonData> datas, DateTime startTime, DateTime endTime, int statu = 0)

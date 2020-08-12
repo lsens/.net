@@ -428,28 +428,6 @@ function func2() {
                 }]
             };
 
-            //if (parseInt(vs4) == 13) {
-            //    option.series = [{
-            //        name: vs3 + '次数',
-            //        //type: 'bar',
-            //        type: 'line',
-            //        data: msg.lineData,
-            //        symbol: 'none',
-            //        areaStyle: {
-            //            normal: {
-            //                color: new echarts.graphic.LinearGradient(
-            //                    0, 0, 0, 1,
-            //                    colorArray
-            //                )
-            //            }
-            //        },
-
-            //        barMaxWidth: 40,
-            //        smooth: true
-            //    }]
-            //};
-
-            // 使用刚指定的配置项和数据显示图表。
             myChart4.setOption(option);
 
             var myChart5 = echarts.init(document.getElementById('main6'));

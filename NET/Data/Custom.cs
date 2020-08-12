@@ -40,13 +40,6 @@ namespace Data
         public DateTime EndTime { get; set; }
     }
 
-    //  构建  存储分箱数据和对应时间段的 列表
-    public class PercentileDataTime
-    {
-        public double[] PercentileDatas { get; set; }
-        public string[] PercentileTimes { get; set; }
-    }
-
     // 构建   一个 存储时间  和 时间列表的  类
     public class TimeAndListClass
     {
@@ -98,6 +91,7 @@ namespace Data
         public string DayTime { get; set; }
         public double TimeCount { get; set; }
     }
+
     //  X Y 结构的 类似point 的类
     public class Point
     {
@@ -109,6 +103,7 @@ namespace Data
             Y = y;
         }
     }
+
     //   构建 存储每个月的异常数据 
     public class MonthCount
     {
@@ -118,6 +113,7 @@ namespace Data
         public List<string> MonthData { get; set; }
 
     }
+
     //  构建  出现异常 的时间点 和 对应的  次数 的数组 类
     public class TimeCounts
     {

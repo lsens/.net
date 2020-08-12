@@ -110,6 +110,7 @@ namespace Data
             return arr;
         }
 
+
         //   数据分箱  正常的 分箱算法  
         public double[] PercentileData8(List<double?> adatas)
         {

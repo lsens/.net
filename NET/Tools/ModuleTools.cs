@@ -88,7 +88,6 @@ namespace Tools
                 NormalData = normalData,
                 AbnormalData = abnormalData.ToArray()
             };
-        
          
             return r;
         }

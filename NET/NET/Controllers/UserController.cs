@@ -11,19 +11,6 @@ namespace NET.Controllers
     //[ApiController]
     public class UserController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return Ok("2");
-        }
-
-        [HttpPost]
-        public IActionResult GetLine([FromBody]Statistical.User.UserP userP)
-        {
-            var r = Bo.GetData.GetLine(userP);
-            return Ok(r);
-        }
-
         [HttpPost]
         public IActionResult GetData([FromBody]Statistical.PR.TestP p)
         {

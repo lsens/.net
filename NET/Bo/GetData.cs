@@ -11,25 +11,6 @@ using NPOI.SS.Formula.Functions;
 
 namespace Bo
 {
-    public class GetData
-    {
-        public static Statistical.User.UserR GetLine(Statistical.User.UserP userP)
-        {
-            var r = new Statistical.User.UserR();
-            if (userP.num2 == 0)
-            {
-                r.sum1 = 0;
-                r.message = "除数不能为0";
-            }
-            else
-            {
-                r.sum1 = userP.num1 / userP.num2;
-                r.message = "成功";
-            }
-            return r;
-        }
-    }
-
     public class GetCount
     {
         public static TestR GetR(TestP p)
@@ -68,7 +49,7 @@ namespace Bo
             return r;
         }
 
-        public static WarnR GetWarnR(TestP p)
+        public static R GetWarnR(TestP p)
         {
             ReadExcel rd = new ReadExcel();
             List<ExcelData> excelDatas = rd.ImportExcel(p.data);
@@ -113,13 +94,13 @@ namespace Bo
             
             List<double> ttList = cutCalculateList.TrendCList.Select(x => x.Value).ToList();
             double [] ttC = calculateData.PercentileData(ttList);
-            int[] normalData = { (int)Math.Round(ttC[1]), (int)Math.Round(ttC[2]) };
-            var r = new WarnR
+            double[] normalData = { ttC[1], ttC[2] };
+            var r = new R
             {
                 LineData = ttList.ToArray(),
                 LineTime = LineTime.ToArray(),
-                PointData = PointData.ToArray(),
-                PointTime = PointTime.ToArray(),
+                AbPointData = PointData.ToArray(),
+                AbPointTime = PointTime.ToArray(),
                 NormalData = normalData
             };
             return r;
@@ -217,6 +198,7 @@ namespace Bo
             return r;
         }
 
+
         public static R GetDayR(TestP p) 
         {
             ReadExcel rd = new ReadExcel();
@@ -297,6 +279,8 @@ namespace Bo
 
         }
 
+
+
         //  跨度过大 数值累加  之间分箱 取异常 效果并不理想  考虑使用一开始的办法  
         public static R GetYearR(TestP p) 
         {
@@ -323,6 +307,7 @@ namespace Bo
 
             return r;
         }
+
     }
 }
 
