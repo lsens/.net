@@ -63,18 +63,42 @@ namespace Tools
             List<double> ttList = bDatas.TrendCList.Select(x => x.Value).ToList();
 
             double[] arr = cd.DataPercentileInplace(aDatas);
+            if (timeSpan == 3)
+            {
+                arr = cd.DataPercentileInplace(ttList);
+            }
             double[] normalData = { (int)Math.Round(arr[1]), (int)Math.Round(arr[2]) };
             double[] abnormalData = { (int)Math.Round(arr[0]), (int)Math.Round(arr[3]) };
 
             List<double> abPointData = new List<double>();
             List<DateTime> abPointTime = new List<DateTime>();
 
-            for (int j = 0; j < aDatas.Count; j++)
+            if (timeSpan == 3) 
             {
-                if (aDatas[j] > abnormalData[1])
+                List<double?> ampC = bDatas.AmplitudeCList;
+                List<double?> ampCTwo = ts.GetAmpC95(ampC);
+
+                double? ampC95 = ampCTwo[0];
+                double? nampC95 = ampCTwo[1];
+
+                for (int i = 0; i < aDatas.Count; i++)
                 {
-                    abPointData.Add((int)aDatas[j]);
-                    abPointTime.Add(cTimes[j]);
+                    if ((ampC95 != null && ampC[i] >= ampC95) || (nampC95 != null && ampC[i] <= nampC95))
+                    {
+                        abPointData.Add(ampC[i].Value);
+                        abPointTime.Add(cTimes[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int j = 0; j < aDatas.Count; j++)
+                {
+                    if (aDatas[j] > abnormalData[1])
+                    {
+                        abPointData.Add((int)aDatas[j]);
+                        abPointTime.Add(cTimes[j]);
+                    }
                 }
             }
 
@@ -86,9 +110,9 @@ namespace Tools
                 AbPointData = abPointData.ToArray(),
                 AbPointTime = abPointTime.Select(x => x.ToString("yyyy-MM-dd HH:mm")).ToArray(),
                 NormalData = normalData,
-                AbnormalData = abnormalData.ToArray()
+                AbnormalData = abnormalData
             };
-         
+            
             return r;
         }
     }

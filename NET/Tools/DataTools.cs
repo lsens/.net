@@ -51,13 +51,13 @@ namespace Tools
         public List<double?> GetAmpC95(List<double?> ampC)
         {
             CalculateData calculateData = new CalculateData();
-            double[] ampCAll = calculateData.PercentileData8(ampC);
+            double[] ampCAll = calculateData.PercentileDataTwo(ampC);
             double? ampC95 = null;
             double? nampC95 = null;
             if (ampCAll.Length > 4)
             {
                 ampC95 = ampCAll[3];
-                nampC95 = ampCAll[7];
+                nampC95 = ampCAll[4];
             }
             else
             {
@@ -67,7 +67,7 @@ namespace Tools
                 }
                 else
                 {
-                    nampC95 = ampCAll[3];
+                    nampC95 = ampCAll[0];
                 }
             }
 

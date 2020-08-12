@@ -83,7 +83,7 @@ namespace Data
 
         }
 
-        //  使用Math.net 实现9  25  75  95  分位数  
+        //  使用Math.net 获取数据的 离群点  适用于常量 短程数据分析   
         public double[] DataPercentileInplace(List<double> datas)
         {
             double[] newDatas = datas.ToArray();
@@ -110,9 +110,8 @@ namespace Data
             return arr;
         }
 
-
-        //   数据分箱  正常的 分箱算法  
-        public double[] PercentileData8(List<double?> adatas)
+        //  正负分开进行判断 
+        public double[] PercentileDataTwo(List<double?> adatas)
         {
             List<double> apercentileDatas = new List<double>();
             List<double> ndatas = new List<double>();
@@ -132,94 +131,28 @@ namespace Data
 
             if (datas.Count > 0)
             {
-                int count = datas.Count - 1;
-                int percentile5 = (int)Math.Round(count * 0.05, MidpointRounding.AwayFromZero);
-                int percentile25 = (int)Math.Round(count * 0.25, MidpointRounding.AwayFromZero);
-                int percentile75 = (int)Math.Round(count * 0.75, MidpointRounding.AwayFromZero);
-                int percentile95 = (int)Math.Round(count * 0.95, MidpointRounding.AwayFromZero);
-
-                List<double> newdatas = datas.OrderBy(data => data).ToList();
-
-                double percentile5Data = newdatas[percentile5];
-                double percentile25Data = newdatas[percentile25];
-                double percentile75Data = newdatas[percentile75];
-                double percentile95Data = newdatas[percentile95];
-
-                int percentile5Index = datas.FindIndex(data => data == percentile5Data);
-                int percentile25Index = datas.FindIndex(data => data == percentile25Data);
-                int percentile75Index = datas.FindIndex(data => data == percentile75Data);
-                int percentile95Index = datas.FindIndex(data => data == percentile95Data);
-
-                double[] percentileDatas = new double[]
-                {
-                percentile5Data,
-                percentile25Data,
-                percentile75Data,
-                percentile95Data
-                };
-
+                double[] percentileDatas = PercentileData(datas);
                 apercentileDatas.AddRange(percentileDatas);
-
             }
             if (ndatas.Count > 0)
             {
-                int count = ndatas.Count - 1;
-
-                int percentile5 = (int)Math.Round(count * 0.05, MidpointRounding.AwayFromZero);
-                int percentile25 = (int)Math.Round(count * 0.25, MidpointRounding.AwayFromZero);
-                int percentile75 = (int)Math.Round(count * 0.75, MidpointRounding.AwayFromZero);
-                int percentile95 = (int)Math.Round(count * 0.95, MidpointRounding.AwayFromZero);
-
-                List<double> newdatas = ndatas.OrderBy(data => data).ToList();
-
-                double percentile5Data = newdatas[percentile5];
-                double percentile25Data = newdatas[percentile25];
-                double percentile75Data = newdatas[percentile75];
-                double percentile95Data = newdatas[percentile95];
-
-                int percentile5Index = ndatas.FindIndex(data => data == percentile5Data);
-                int percentile25Index = ndatas.FindIndex(data => data == percentile25Data);
-                int percentile75Index = ndatas.FindIndex(data => data == percentile75Data);
-                int percentile95Index = ndatas.FindIndex(data => data == percentile95Data);
-
-                double[] percentileDatas = new double[]
-                {
-                percentile95Data,
-                percentile75Data,
-                percentile25Data,
-                percentile5Data
-                };
-
+                double[] percentileDatas = PercentileData(ndatas);
                 apercentileDatas.AddRange(percentileDatas);
-
             }
 
             double[] pDatas = apercentileDatas.ToArray();
-
             return pDatas;
         }
 
-        //   数据分箱  正常的 分箱算法  
+        //  数据分箱 取 5 25 75 95 4个位置的值
         public double[] PercentileData(List<double> datas)
         {
-            int count = datas.Count - 1;
+            double[] newDatas = datas.ToArray();
 
-            int percentile5 = (int)Math.Round(count * 0.05, MidpointRounding.AwayFromZero);
-            int percentile25 = (int)Math.Round(count * 0.25, MidpointRounding.AwayFromZero);
-            int percentile75 = (int)Math.Round(count * 0.75, MidpointRounding.AwayFromZero);
-            int percentile95 = (int)Math.Round(count * 0.95, MidpointRounding.AwayFromZero);
-
-            List<double> newdatas = datas.OrderBy(data => data).ToList();
-
-            double percentile5Data = newdatas[percentile5];
-            double percentile25Data = newdatas[percentile25];
-            double percentile75Data = newdatas[percentile75];
-            double percentile95Data = newdatas[percentile95];
-
-            int percentile5Index = datas.FindIndex(data => data == percentile5Data);
-            int percentile25Index = datas.FindIndex(data => data == percentile25Data);
-            int percentile75Index = datas.FindIndex(data => data == percentile75Data);
-            int percentile95Index = datas.FindIndex(data => data == percentile95Data);
+            double percentile5Data = ArrayStatistics.PercentileInplace(newDatas, 5);
+            double percentile25Data = ArrayStatistics.PercentileInplace(newDatas, 25);
+            double percentile75Data = ArrayStatistics.PercentileInplace(newDatas, 75);
+            double percentile95Data = ArrayStatistics.PercentileInplace(newDatas, 95);
 
             double[] percentileDatas = new double[]
             {
@@ -231,6 +164,7 @@ namespace Data
 
             return percentileDatas;
         }
+
         //   输入 时间窗口  输出切割后的时间  数据进来就进行切割  具体 空值 处理 后面再写 
         public List<StartEndTime> CutTimes(List<DateTime?> times, int aWindow = 14)
         {
@@ -260,7 +194,6 @@ namespace Data
 
         //   入睡时间模型  ps：起床时间模型    ok  ok  ok  异常问题
         //   传入入睡时间  和切割后的时间    输出趋势线的点以及对应的时间段  以及异常点和异常时间  
-
         public SleepTimeLineAndPoint GetSleepTimeLineAndPoint(List<TimeAndListClass> goSleepTimeList, List<DateTime?> endSleepData, int cWindow = 2, int aWindow = 14)
         {
 

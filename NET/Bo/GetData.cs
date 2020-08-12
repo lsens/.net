@@ -60,50 +60,65 @@ namespace Bo
                 .Select(x => x.EndSleepTime)
                 .ToList();
 
-            DataTools tools = new DataTools();
-            DataCount dc = new DataCount();
-            CalculateData calculateData = new CalculateData();
+            DataTools ts = new DataTools();
+            ModuleTools mt = new ModuleTools();
 
-            List<double> datas = dc.GetJsonDataCount(tools.GetDataType(p.data, p.status));
+            int dataStatus = p.status - 300;
+            int timeSpan = 3;
+            int[] windows = ts.GetWindow(timeSpan);
 
-            CutCalculateList cutCalculateList = calculateData.CutCalculateData(datas, 2, 14);
+            List<string> datas = ts.GetDataType(p.data, dataStatus);
 
-            List<StartEndTime> timeData = calculateData.CutTimes(endSleepData, 14);
+            R r = new R();
 
-            List<double> PointData = new List<double>();
-            List<string> LineTime = new List<string>();
-            List<string> PointTime = new List<string>();
+            r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
 
-            List<double?> ampC = cutCalculateList.AmplitudeCList;
-
-            List<double?> ampCTwo = tools.GetAmpC95(ampC);
-
-            double? ampC95 = ampCTwo[0];
-            double? nampC95 = ampCTwo[1];
-
-            for (int i = 0; i < timeData.Count; i++)
-            {
-                string time = string.Format("{0},{1}", timeData[i].StartTime.ToShortDateString(), timeData[i].EndTime.ToShortDateString());
-                LineTime.Add(time);
-                if ((ampC95 != null && ampC[i] >= ampC95) || (nampC95 != null && ampC[i] <= nampC95))
-                {
-                    PointData.Add(ampC[i].Value);
-                    PointTime.Add(time);  
-                }
-            }
-            
-            List<double> ttList = cutCalculateList.TrendCList.Select(x => x.Value).ToList();
-            double [] ttC = calculateData.PercentileData(ttList);
-            double[] normalData = { ttC[1], ttC[2] };
-            var r = new R
-            {
-                LineData = ttList.ToArray(),
-                LineTime = LineTime.ToArray(),
-                AbPointData = PointData.ToArray(),
-                AbPointTime = PointTime.ToArray(),
-                NormalData = normalData
-            };
             return r;
+
+            //DataCount dc = new DataCount();
+            //CalculateData cd = new CalculateData();
+
+            //List<double> datas = dc.GetJsonDataCount(ts.GetDataType(p.data, dataStatus));
+
+            //CutCalculateList bDatas = cd.CutCalculateData(datas, windows[0], windows[1]);
+            //List<double> ttList = bDatas.TrendCList.Select(x => x.Value).ToList();
+
+            //List<StartEndTime> timeData = cd.CutTimes(endSleepData, windows[1]);
+
+            //List<DateTime> LineTime = new List<DateTime>();
+
+            //List<double> abPointData = new List<double>();
+            //List<DateTime> abPointTime = new List<DateTime>();
+
+            //List<double?> ampC = bDatas.AmplitudeCList;
+            //List<double?> ampCTwo = ts.GetAmpC95(ampC);
+
+            //double? ampC95 = ampCTwo[0];
+            //double? nampC95 = ampCTwo[1];
+
+            //for (int i = 0; i < timeData.Count; i++)
+            //{
+            //    DateTime time = timeData[i].StartTime;
+            //    LineTime.Add(time);
+            //    if ((ampC95 != null && ampC[i] >= ampC95) || (nampC95 != null && ampC[i] <= nampC95))
+            //    {
+            //        abPointData.Add(ampC[i].Value);
+            //        abPointTime.Add(time);
+            //    }
+            //}
+
+            //double [] ttC = cd.PercentileData(ttList);
+            //double[] normalData = { ttC[1], ttC[2] };
+            //var r = new R
+            //{
+            //    LineData = ttList.ToArray(),
+            //    LineTime = LineTime.Select(x => x.ToString("yyyy-MM-dd HH:mm")).ToArray(),
+            //    AbPointData = abPointData.ToArray(),
+            //    AbPointTime = abPointTime.Select(x => x.ToString("yyyy-MM-dd HH:mm")).ToArray(),
+            //    NormalData = normalData
+            //};
+
+            //return r;
         }
 
         public static DayR GetWeekDayR(TestP p)
@@ -282,31 +297,31 @@ namespace Bo
 
 
         //  跨度过大 数值累加  之间分箱 取异常 效果并不理想  考虑使用一开始的办法  
-        public static R GetYearR(TestP p) 
-        {
-            ReadExcel rd = new ReadExcel();
-            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
+        //public static R GetYearR(TestP p) 
+        //{
+        //    ReadExcel rd = new ReadExcel();
+        //    List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
-            List<DateTime?> endSleepData;
+        //    List<DateTime?> endSleepData;
 
-            endSleepData = excelDatas
-                .Select(x => x.EndSleepTime)
-                .ToList();
+        //    endSleepData = excelDatas
+        //        .Select(x => x.EndSleepTime)
+        //        .ToList();
 
-            DataTools tools = new DataTools();
-            ModuleTools mt = new ModuleTools();
-            DataCount dc = new DataCount();
+        //    DataTools tools = new DataTools();
+        //    ModuleTools mt = new ModuleTools();
+        //    DataCount dc = new DataCount();
 
-            int dataStatus = p.status - 300;
+        //    int dataStatus = p.status - 300;
 
-            List<string> datas = tools.GetDataType(p.data, dataStatus);
+        //    List<string> datas = tools.GetDataType(p.data, dataStatus);
 
-            R r = new R();
+        //    R r = new R();
 
-            r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
+        //    r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
 
-            return r;
-        }
+        //    return r;
+        //}
 
     }
 }

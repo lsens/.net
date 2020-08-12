@@ -99,15 +99,15 @@
         type: "POST",
         url: "http://localhost:5000/api/User/GetData",
         contentType: "application/json",
-        data: JSON.stringify({ "data": vs, "status": parseInt(vs2) }),
+        data: JSON.stringify({ "data": vs, "status": 300 + parseInt(vs2) }),
         dataType: "json",
         success: function (msg) {
             console.log(msg);
 
             var points = [];
-            for (var i = 0; i < msg.pointData.length; i++) {
+            for (var i = 0; i < msg.abPointData.length; i++) {
                 points.push(
-                    [msg.pointTime[i], msg.pointData[i]]
+                    [msg.abPointTime[i], msg.abPointData[i]]
                 )
             }
 
@@ -197,13 +197,13 @@
 
             // 使用刚指定的配置项和数据显示图表。
             myChart2.setOption(option2);
-            $("#stime1").text(msg.pointTime[0])
-            $("#etime1").text(msg.pointTime[1])
-            $("#data1").text(msg.pointData[0])
-            $("#data2").text(msg.pointData[1])
+            $("#stime1").text(msg.abPointTime[0])
+            $("#etime1").text(msg.abPointTime[1])
+            $("#data1").text(msg.abPointData[0])
+            $("#data2").text(msg.abPointData[1])
             $("#vs3").text(vs3)
-            $("#normalData1").text(msg.normalData[0])
-            $("#normalData2").text(normalData2)
+            $("#normalData1").text(parseInt(msg.normalData[0]))
+            $("#normalData2").text(parseInt(normalData2))
             $("#main4").show();
 
         }

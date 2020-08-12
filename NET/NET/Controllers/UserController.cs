@@ -31,7 +31,7 @@ namespace NET.Controllers
             }
             else if (p.status > 300 && p.status < 400)
             {
-                var r = Bo.GetCount.GetYearR(p);
+                var r = Bo.GetCount.GetWarnR(p);
                 return Ok(r);
             }
             else if (p.status > 90)
@@ -41,8 +41,7 @@ namespace NET.Controllers
             }
             else
             {
-                var r = Bo.GetCount.GetWarnR(p);
-                return Ok(r);
+                return Ok("出错了");
             }
         }
     }
