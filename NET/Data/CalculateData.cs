@@ -290,13 +290,17 @@ namespace Data
             for (int i = 0; i < gSCTLL.Count; i++)
             {
                 double? maxData = gSCTLL[i].Max();
+
                 int maxIndex = gSCTLL[i].FindIndex(x => x == maxData);
+
                 int Data = goSleepTimeList[maxIndex].TimeHour;
+
                 string time = string.Format("{0},{1}", timeData[i].StartTime.ToShortDateString(), timeData[i].EndTime.ToShortDateString());
 
                 lineData.Add(Data);
                 lineTime.Add(time);
             }
+
             sleepTimeLineAndPoint.LineData = lineData;
             sleepTimeLineAndPoint.LineTime = lineTime;
 
@@ -304,6 +308,118 @@ namespace Data
 
         }
 
+        //  短时间入睡分析判断  
+        public void GetGoSleepStatus(List<DateTime> times)
+        {
+            double length = times.Count;
+
+            List<HourCount> hourCounts = new List<HourCount>();
+
+            for (int i = 0; i < length; i++)
+            {
+                if (hourCounts.Exists(x => x.Time == times[i].Hour))
+                {
+                    HourCount hourCount = hourCounts.FirstOrDefault(x => x.Time == times[i].Hour);
+                    hourCount.Count++;
+                }
+                else
+                {
+                    HourCount hourCount = new HourCount(times[i].Hour, 1);
+                    hourCounts.Add(hourCount);
+                }
+            }
+
+            int? oneTime = null;
+            List<int> twoTime = new List<int>();
+
+            for (int i = 0; i < hourCounts.Count; i++)
+            {
+                if (hourCounts[i].Count / length > 0.5)
+                {
+                    oneTime = hourCounts[i].Time;
+                }
+                else if (hourCounts[i].Count / length > 0.27)
+                {
+                    twoTime.Add(hourCounts[i].Time);
+                }
+            }
+            
+            //  24 点和 第二天
+
+
+            List<DateTime> AbnormalTime = new List<DateTime>();
+            List<int> NormalData = new List<int>();
+
+            if (oneTime != null)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    int poor = Math.Abs(times[i].Hour - oneTime.Value);
+                    if (poor >= 2 && poor < 12)
+                    {
+                        AbnormalTime.Add(times[i]);
+                    }
+                    else if (poor <= 22 && poor >= 12)
+                    {
+                        AbnormalTime.Add(times[i]);
+                    }
+                }
+                NormalData.Add(oneTime.Value);
+            }
+            else if (twoTime.Count == 2)
+            {
+                twoTime.Sort();
+                int poor = twoTime[1] - twoTime[0];
+                if (poor == 1)
+                {
+                    double t1 = twoTime[0] + 0.5;
+                    for (int i = 0; i < length; i++)
+                    {
+                        double t2 = times[i].Hour + times[i].Minute / 60;
+                        double poor2 = t2 - t1;
+                        if (poor2 >= 2 && poor2 < 12)
+                        {
+                            AbnormalTime.Add(times[i]);
+                        }
+                        else if (poor2 <= 22 && poor2 >= 12)
+                        {
+                            AbnormalTime.Add(times[i]);
+                        }
+                    }
+
+                    NormalData.AddRange(twoTime);
+                }
+                else if (poor == 23)
+                {
+                    double t1 = 23.5;
+                    for (int i = 0; i < length; i++)
+                    {
+                        double t2 = times[i].Hour + times[i].Minute / 60;
+                        double poor2 = t2 - t1;
+                        if (poor2 >= 2 && poor2 < 12)
+                        {
+                            AbnormalTime.Add(times[i]);
+                        }
+                        else if (poor2 <= 22 && poor2 >= 12)
+                        {
+                            AbnormalTime.Add(times[i]);
+                        }
+                    }
+
+                    NormalData.Add(twoTime[1]);
+                    NormalData.Add(twoTime[0]);
+                }
+
+            }
+            
+            List<int> LineData = new List<int>();
+            List<string> LineTime = new List<string>();
+
+            LineData = times.Select(x => x.Hour).ToList();
+            LineTime = times.Select(x => x.ToShortDateString()).ToList();
+
+        }
+        
     }
 }
 

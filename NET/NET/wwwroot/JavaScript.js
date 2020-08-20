@@ -343,7 +343,7 @@ function func2() {
                     formatter: function (params) {
                         var data;
                         for (var i = 0; i < msg.lineTime.length; i++) {
-                            if (msg.lineTime[i] == params.name) {
+                            if (lineTimeDay[i] == params.name) {
                                 data = msg.pointData[i];
                             }
                         }
@@ -574,7 +574,6 @@ function func2() {
             });
         }
     })
-
 }
 
 

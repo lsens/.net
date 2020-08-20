@@ -30,3 +30,5 @@ C:\Users\HC\Desktop\git\.net\NET\Bo\obj\Release\netcoreapp3.1\Bo.csproj.CopyComp
 C:\Users\HC\Desktop\git\.net\NET\Bo\obj\Release\netcoreapp3.1\Bo.dll
 C:\Users\HC\Desktop\git\.net\NET\Bo\obj\Release\netcoreapp3.1\Bo.pdb
 C:\Users\HC\Desktop\git\.net\NET\Bo\obj\Release\netcoreapp3.1\Bo.csproj.CoreCompileInputs.cache
+C:\Users\HC\Desktop\git\.net\NET\Bo\bin\Release\netcoreapp3.1\ClassDemo.dll
+C:\Users\HC\Desktop\git\.net\NET\Bo\bin\Release\netcoreapp3.1\ClassDemo.pdb

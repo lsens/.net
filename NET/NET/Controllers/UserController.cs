@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Statistical.PR;
+using Tools;
 
 namespace NET.Controllers
 {
@@ -12,7 +14,7 @@ namespace NET.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost]
-        public IActionResult GetData([FromBody]Statistical.PR.TestP p)
+        public IActionResult GetData([FromBody]TestP p)
         {
             if (p.status == 0)
             {
@@ -31,7 +33,7 @@ namespace NET.Controllers
             }
             else if (p.status > 300 && p.status < 400)
             {
-                var r = Bo.GetCount.GetWarnR(p);
+                var r = Bo.GetCount.GetYearR(p);
                 return Ok(r);
             }
             else if (p.status > 90)
@@ -44,8 +46,54 @@ namespace NET.Controllers
                 return Ok("出错了");
             }
         }
+
+        [HttpPost]
+        public IActionResult Test([FromBody]P p)
+        {
+            //ModuleTools mt = new ModuleTools();
+
+            //List<string> jsonDatas = new List<string>
+            //{
+            //    p.data
+            //};
+
+            //List<DateTime> times = new List<DateTime>
+            //{
+            //    p.startTime,
+            //    p.endTime
+            //};
+
+            //var r = mt.ReturnModule(jsonDatas, times, 1);
+
+            return Ok(p.startTime);
+        }
+
+        [HttpGet]
+        public IActionResult Test2([FromBody]TestP p) 
+        {
+            var r = Bo.GetCount.GetDeepSleepR(p);
+            return Ok(r);
+        }
+
+        [HttpGet]
+        public IActionResult Demo([FromBody]TestP p)
+        {
+            if (p.status == 0)
+            {
+                var r = Bo.GetCount.GetDeepSleepR(p);
+                return Ok(r);
+            }
+            else
+            {
+                var r = Bo.GetCount.GetDeepSleepR(p);
+                return Ok(r);
+            }
+        }
+
     }
 }
+
+
 
 
 

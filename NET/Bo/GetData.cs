@@ -9,12 +9,15 @@ using System.Text;
 using System.IO;
 using NPOI.SS.Formula.Functions;
 
+
 namespace Bo
 {
     public class GetCount
     {
         public static TestR GetR(TestP p)
         {
+
+            DataCount dc = new DataCount();
             ReadExcel rd = new ReadExcel();
             List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
@@ -29,7 +32,6 @@ namespace Bo
                 .Select(x => x.EndSleepTime)
                 .ToList();
 
-            DataCount dc = new DataCount();
             CalculateData calculateData = new CalculateData();
 
             List<TimeAndListClass> timeAndListClass = dc.GetTimeAndList(startSleepData);
@@ -49,80 +51,10 @@ namespace Bo
             return r;
         }
 
-        public static R GetWarnR(TestP p)
-        {
-            ReadExcel rd = new ReadExcel();
-            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
-
-            List<DateTime?> endSleepData;
-
-            endSleepData = excelDatas
-                .Select(x => x.EndSleepTime)
-                .ToList();
-
-            DataTools ts = new DataTools();
-            ModuleTools mt = new ModuleTools();
-
-            int dataStatus = p.status - 300;
-            int timeSpan = 3;
-            int[] windows = ts.GetWindow(timeSpan);
-
-            List<string> datas = ts.GetDataType(p.data, dataStatus);
-
-            R r = new R();
-
-            r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
-
-            return r;
-
-            //DataCount dc = new DataCount();
-            //CalculateData cd = new CalculateData();
-
-            //List<double> datas = dc.GetJsonDataCount(ts.GetDataType(p.data, dataStatus));
-
-            //CutCalculateList bDatas = cd.CutCalculateData(datas, windows[0], windows[1]);
-            //List<double> ttList = bDatas.TrendCList.Select(x => x.Value).ToList();
-
-            //List<StartEndTime> timeData = cd.CutTimes(endSleepData, windows[1]);
-
-            //List<DateTime> LineTime = new List<DateTime>();
-
-            //List<double> abPointData = new List<double>();
-            //List<DateTime> abPointTime = new List<DateTime>();
-
-            //List<double?> ampC = bDatas.AmplitudeCList;
-            //List<double?> ampCTwo = ts.GetAmpC95(ampC);
-
-            //double? ampC95 = ampCTwo[0];
-            //double? nampC95 = ampCTwo[1];
-
-            //for (int i = 0; i < timeData.Count; i++)
-            //{
-            //    DateTime time = timeData[i].StartTime;
-            //    LineTime.Add(time);
-            //    if ((ampC95 != null && ampC[i] >= ampC95) || (nampC95 != null && ampC[i] <= nampC95))
-            //    {
-            //        abPointData.Add(ampC[i].Value);
-            //        abPointTime.Add(time);
-            //    }
-            //}
-
-            //double [] ttC = cd.PercentileData(ttList);
-            //double[] normalData = { ttC[1], ttC[2] };
-            //var r = new R
-            //{
-            //    LineData = ttList.ToArray(),
-            //    LineTime = LineTime.Select(x => x.ToString("yyyy-MM-dd HH:mm")).ToArray(),
-            //    AbPointData = abPointData.ToArray(),
-            //    AbPointTime = abPointTime.Select(x => x.ToString("yyyy-MM-dd HH:mm")).ToArray(),
-            //    NormalData = normalData
-            //};
-
-            //return r;
-        }
-
         public static DayR GetWeekDayR(TestP p)
         {
+            DataCount dc = new DataCount();
+            DataTools ts = new DataTools();
             ReadExcel rd = new ReadExcel();
             List<ExcelData> excelDatas = rd.ImportExcel(p.data);
             List<DateTime?> startSleepData;
@@ -136,39 +68,15 @@ namespace Bo
                 .Select(x => x.EndSleepTime)
                 .ToList();
 
-            DataTools tools = new DataTools();
-            DataCount dc = new DataCount();
-            CalculateData calculateData = new CalculateData();
-
-            List<string> holidayList = new List<string>
-                {
-                    "2020/6/25",
-                    "2020/5/1",
-                    "2020/5/2",
-                    "2020/5/3",
-                    "2020/5/4",
-                    "2020/5/5",
-                    "2020/4/4",
-                    "2020/4/5",
-                    "2020/4/6",
-                    "2020/1/29",
-                    "2020/1/28",
-                    "2020/1/27",
-                    "2020/1/26",
-                    "2020/1/25",
-                    "2020/1/24",
-                    "2020/1/1",
-                    "2020/1/30",
-                    "2020/1/31",
-                    "2020/2/1",
-                    "2020/2/2",
-                };
+            //  读取静态的假期日期txt文件  后期可以直接对该文件进行新的日期添加
+            string[] holidayArr = File.ReadAllLines("holiday.txt");
+            List<string> holidayList = new List<string>();
+            holidayList.AddRange(holidayArr);
 
             List<DayCount> dayCount = new List<DayCount>();
-
             int dataStatus = p.status - 90;
 
-            dayCount = dc.GetDayCount(tools.GetDataType(p.data, dataStatus), endSleepData);
+            dayCount = dc.GetDayCount(ts.GetDataType(p.data, dataStatus), endSleepData);
 
             List<DayCount> ortherWeek = new List<DayCount>();
             List<DayCount> monday = new List<DayCount>();
@@ -213,15 +121,12 @@ namespace Bo
             return r;
         }
 
-
         public static R GetDayR(TestP p) 
         {
+            DataTools ts = new DataTools();
             ReadExcel rd = new ReadExcel();
-            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
-
-            DataCount dc = new DataCount();
             ModuleTools mt = new ModuleTools();
-            CalculateData cd = new CalculateData();
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
             //   时间段模型  也是 每天 的模型  
             ExcelData excelData = excelDatas.Where(x => x.EndSleepTime.Value.Month == p.month && x.EndSleepTime.Value.Day == p.day).First();
@@ -253,14 +158,18 @@ namespace Bo
             R r = new R();
 
             r = mt.ReturnModule(jsonDatas, times, 1, dataStatus);
-           
+            
             return r;
 
         }
 
         public static R GetMonthR(TestP p)
         {
+            DataTools ts = new DataTools();
             ReadExcel rd = new ReadExcel();
+            DataCount dc = new DataCount();
+            ModuleTools mt = new ModuleTools();
+
             List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
             List<DateTime?> endSleepData;
@@ -269,13 +178,9 @@ namespace Bo
                 .Select(x => x.EndSleepTime)
                 .ToList();
 
-            DataTools tools = new DataTools();
-            ModuleTools mt = new ModuleTools();
-            DataCount dc = new DataCount();
-
             int dataStatus = p.status - 200;
 
-            List<MonthCount> monthCount = dc.GetMonthTimeDataCount(endSleepData, tools.GetDataType(p.data, dataStatus));
+            List<MonthCount> monthCount = dc.GetMonthTimeDataCount(endSleepData, ts.GetDataType(p.data, dataStatus));
 
             R r = new R();
 
@@ -294,34 +199,96 @@ namespace Bo
 
         }
 
+        public static R GetYearR(TestP p)
+        {
 
+            DataTools ts = new DataTools();
+            ReadExcel rd = new ReadExcel();
+            ModuleTools mt = new ModuleTools();
 
-        //  跨度过大 数值累加  之间分箱 取异常 效果并不理想  考虑使用一开始的办法  
-        //public static R GetYearR(TestP p) 
-        //{
-        //    ReadExcel rd = new ReadExcel();
-        //    List<ExcelData> excelDatas = rd.ImportExcel(p.data);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
-        //    List<DateTime?> endSleepData;
+            List<DateTime?> endSleepData;
 
-        //    endSleepData = excelDatas
-        //        .Select(x => x.EndSleepTime)
-        //        .ToList();
+            endSleepData = excelDatas
+                .Select(x => x.EndSleepTime)
+                .ToList();
 
-        //    DataTools tools = new DataTools();
-        //    ModuleTools mt = new ModuleTools();
-        //    DataCount dc = new DataCount();
+            int dataStatus = p.status - 300;
+            List<string> datas = ts.GetDataType(p.data, dataStatus);
 
-        //    int dataStatus = p.status - 300;
+            R r = new R();
+            r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
+            return r;
+        }
 
-        //    List<string> datas = tools.GetDataType(p.data, dataStatus);
+        public static ClassDemo.R Test(TestP p) 
+        {
 
-        //    R r = new R();
+            DataTools ts = new DataTools();
+            ReadExcel rd = new ReadExcel();
+            DataCount dc = new DataCount();
+            ClassDemo.ReturnDemo cr = new ClassDemo.ReturnDemo();
 
-        //    r = mt.ReturnModule(datas, endSleepData.Select(x => x.Value).ToList(), 3, dataStatus);
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
 
-        //    return r;
-        //}
+            List<DateTime?> endSleepData;
+
+            endSleepData = excelDatas
+                .Select(x => x.EndSleepTime)
+                .ToList();
+
+            int dataStatus = p.status - 200;
+
+            List<MonthCount> monthCount = dc.GetMonthTimeDataCount(endSleepData, ts.GetDataType(p.data, dataStatus));
+
+            ClassDemo.R r = new ClassDemo.R();
+
+            for (int i = 0; i < monthCount.Count; i++)
+            {
+                if (monthCount[i].Month == p.month)
+                {
+                    List<string> monthData = monthCount[i].MonthData;
+                    List<DateTime> monthTime = monthCount[i].MonthTime;
+
+                    r = cr.ReturnModule(monthData, monthTime, 2, dataStatus);
+                }
+            }
+
+            return r;
+        }
+
+        public static R GetDeepSleepR(TestP p) 
+        {
+            DataTools ts = new DataTools();
+            ReadExcel rd = new ReadExcel();
+            DataCount dc = new DataCount();
+            ModuleTools mt = new ModuleTools();
+
+            List<ExcelData> excelDatas = rd.ImportExcel(p.data);
+
+            List<string> periodData;
+            periodData = excelDatas
+              .Select(x => x.PeriodData)
+              .ToList();
+
+            //  深睡时间模型
+            List<double> DeepSleepTimeData = new List<double>();
+            DeepSleepTimeData = dc.GetDeepSleepTimeData(periodData);
+
+            List<DateTime?> endSleepData;
+            endSleepData = excelDatas
+            .Select(x => x.EndSleepTime)
+            .ToList();
+
+            R r = new R
+            {
+                LineData = DeepSleepTimeData.ToArray(),
+                LineTime = endSleepData.Select(x => x.Value.ToString("MM-dd")).ToArray()
+            };
+
+            return r;
+        }
 
     }
 }

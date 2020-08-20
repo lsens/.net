@@ -50,6 +50,7 @@ namespace NET
                     name: "default",
                     pattern: "api/{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

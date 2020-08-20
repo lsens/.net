@@ -105,6 +105,5 @@ namespace Tools
 
             return timeWindows;
         }
-
     }
 }

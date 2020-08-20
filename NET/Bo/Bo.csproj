@@ -15,4 +15,10 @@
     <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ClassDemo">
+      <HintPath>..\..\..\..\ClassDemo\ClassDemo\bin\Debug\netstandard2.0\ClassDemo.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -121,4 +121,16 @@ namespace Data
         public List<double> Counts { get; set; }
     }
 
+    public class HourCount
+    {
+        public int Time { get; set; }
+        public int Count { get; set; }
+
+        public HourCount(int time, int count)
+        {
+            Time = time;
+            Count = count;
+        }
+    }
+
 }
