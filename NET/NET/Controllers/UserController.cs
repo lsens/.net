@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Statistical.PR;
 using Tools;
 
@@ -48,24 +49,36 @@ namespace NET.Controllers
         }
 
         [HttpPost]
-        public IActionResult Test([FromBody]P p)
+        public IActionResult Test([FromBody] Rootobject p)
         {
-            //ModuleTools mt = new ModuleTools();
+            ModuleTools mt = new ModuleTools();
 
-            //List<string> jsonDatas = new List<string>
-            //{
-            //    p.data
-            //};
+            string jsonData = "[";
+            List<string> jsonDatas = new List<string>();
 
-            //List<DateTime> times = new List<DateTime>
-            //{
-            //    p.startTime,
-            //    p.endTime
-            //};
+            for (int i = 0; i < p.data.Length; i++)
+            {
+                string dd = JsonConvert.SerializeObject(p.data[i]);
+                jsonData += dd;
+                jsonData += ",";
+            }
 
-            //var r = mt.ReturnModule(jsonDatas, times, 1);
+            jsonData += "]";
 
-            return Ok(p.startTime);
+            jsonDatas.Add(jsonData);
+
+            List<DateTime> times = new List<DateTime>
+            {
+                Convert.ToDateTime(p.startTime),
+                Convert.ToDateTime(p.endTime)
+            };
+
+            var r = mt.ReturnModule(jsonDatas, times, 1, 1);
+
+            //var r = jsonDatas;
+
+            return Ok(r);
+
         }
 
         [HttpGet]
@@ -89,9 +102,9 @@ namespace NET.Controllers
                 return Ok(r);
             }
         }
-
     }
 }
+
 
 
 

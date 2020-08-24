@@ -211,7 +211,7 @@ C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.dll
 C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.pdb
 C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.genruntimeconfig.cache
 C:\Users\HC\Desktop\git\.net\NET\NET\bin\Release\netcoreapp3.1\MathNet.Numerics.dll
-C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.csproj.CoreCompileInputs.cache
-C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\HC\Desktop\git\.net\NET\NET\bin\Release\netcoreapp3.1\ClassDemo.dll
 C:\Users\HC\Desktop\git\.net\NET\NET\bin\Release\netcoreapp3.1\ClassDemo.pdb
+C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.csproj.CoreCompileInputs.cache
+C:\Users\HC\Desktop\git\.net\NET\NET\obj\Release\netcoreapp3.1\NET.MvcApplicationPartsAssemblyInfo.cache

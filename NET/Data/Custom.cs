@@ -16,7 +16,7 @@ namespace Data
         public string PeriodJsonData { get; set; }
         public string PeriodData { get; set; }
     }
-    
+
     //  多时间json数据
     public class JsonData
     {
@@ -132,5 +132,9 @@ namespace Data
             Count = count;
         }
     }
+
+
+  
+
 
 }
