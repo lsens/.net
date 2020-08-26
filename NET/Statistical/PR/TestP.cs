@@ -53,4 +53,27 @@ namespace Statistical.PR
         /// </summary>
         public DateTime CREATETIME { get; set; }
     }
+
+
+
+    public class Rootobject1
+    {
+        public string message { get; set; }
+        public string nu { get; set; }
+        public string ischeck { get; set; }
+        public string condition { get; set; }
+        public string com { get; set; }
+        public string status { get; set; }
+        public string state { get; set; }
+        public Datum1[] data { get; set; }
+    }
+
+    public class Datum1
+    {
+        public string time { get; set; }
+        public string ftime { get; set; }
+        public string context { get; set; }
+        public string location { get; set; }
+    }
+
 }

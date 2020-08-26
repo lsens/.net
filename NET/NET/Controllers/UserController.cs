@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -66,7 +67,7 @@ namespace NET.Controllers
             jsonData += "]";
 
             jsonDatas.Add(jsonData);
-
+            
             List<DateTime> times = new List<DateTime>
             {
                 Convert.ToDateTime(p.startTime),
@@ -102,9 +103,29 @@ namespace NET.Controllers
                 return Ok(r);
             }
         }
+
+        private readonly SampleClient _sampleClient;
+
+        public UserController(SampleClient sampleClient)
+        {
+            _sampleClient = sampleClient;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            string result = await _sampleClient.Client.GetStringAsync("query?type=ems&postid=1651466");
+
+            Rootobject1 rootobject = JsonConvert.DeserializeObject<Rootobject1>(result);
+
+            string msg = rootobject.message;
+
+            return Ok(msg);
+        }
+
+
     }
 }
-
 
 
 

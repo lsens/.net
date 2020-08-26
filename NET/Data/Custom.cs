@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace Data
@@ -134,7 +135,16 @@ namespace Data
     }
 
 
-  
+    public class SampleClient
+    {
+        public HttpClient Client { get; private set; }
 
-
+        public SampleClient(HttpClient httpClient)
+        {
+            httpClient.BaseAddress = new Uri("http://www.kuaidi100.com/");
+            httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-Sample");
+            Client = httpClient;
+        }
+    }
 }
